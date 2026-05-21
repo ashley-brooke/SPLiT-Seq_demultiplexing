@@ -145,7 +145,8 @@ def run_star_alignment_fun (numCores, starGenome, resultsDir):
         " --readFilesIn ./MergedCells_passing.fastq " + 
             "--outFilterMismatchNoverLmax 0.05 " + 
             "--genomeDir " + starGenome +
-            " --alignIntronMax 20000 " +
+            " --alignIntronMax 1000000 " +
+            "--outSAMstrandField intronMotif " +
             "--outSAMtype BAM SortedByCoordinate")
     os.system(command_str)
     os.chdir("../")
@@ -158,8 +159,7 @@ def run_featureCounts_SAF_fun (numCores, countsFile, resultsDir):
             " -o gene_assigned " +
             "-R BAM Aligned.sortedByCoord.out.bam " +
             "-T " + numCores +
-            " -M" +
-            " -L")
+            " -M")
     os.system(command_str)
     os.chdir("../")
 
