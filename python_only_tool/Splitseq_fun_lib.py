@@ -151,10 +151,7 @@ def run_star_alignment_fun(numCores, starGenome, resultsDir):
         " --outFilterMatchNminOverLread 0.3 " +
         " --outFilterMatchNmin 20 " +
         " --outSAMstrandField intronMotif " +
-        " --outSAMtype BAM SortedByCoordinate " +
-        " --outSAMattributes NH HI AS NM CB UB " +
-        " --soloType CB_UMI_Complex " +
-        " --runDirPerm All_RWX"
+        " --outSAMtype BAM SortedByCoordinate " 
     )
     os.system(command_str)
     os.chdir("../")
