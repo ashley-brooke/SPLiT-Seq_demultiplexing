@@ -137,20 +137,28 @@ def run_minimap2_alignment_fun (numCores, minimap2Genome, resultsDir):
     os.system(command_str4)
     os.system(command_str5)
     os.chdir("../")
-
-def run_star_alignment_fun (numCores, starGenome, resultsDir):
+    
+def run_star_alignment_fun(numCores, starGenome, resultsDir):
     import os
     os.chdir(resultsDir)
-    command_str = str("STAR --runThreadN " + numCores +     
-        " --readFilesIn ./MergedCells_passing.fastq " + 
-            "--outFilterMismatchNoverLmax 0.05 " + 
-            "--genomeDir " + starGenome +
-            " --alignIntronMax 1000000 " +
-            "--outSAMstrandField intronMotif " +
-            "--outSAMtype BAM SortedByCoordinate")
+    command_str = (
+        "STAR --runThreadN " + str(numCores) +
+        " --readFilesIn ./MergedCells_passing.fastq " +
+        " --genomeDir " + starGenome +
+        " --alignIntronMax 1000000 " +
+        " --outFilterMismatchNoverLmax 0.05 " +
+        " --outFilterScoreMinOverLread 0.3 " +
+        " --outFilterMatchNminOverLread 0.3 " +
+        " --outFilterMatchNmin 20 " +
+        " --outSAMstrandField intronMotif " +
+        " --outSAMtype BAM SortedByCoordinate " +
+        " --outSAMattributes NH HI AS NM CB UB " +
+        " --soloType CB_UMI_Complex " +
+        " --runDirPerm All_RWX"
+    )
     os.system(command_str)
     os.chdir("../")
-
+    
 def run_featureCounts_SAF_fun (numCores, countsFile, resultsDir):
     import os
     os.chdir(resultsDir)
